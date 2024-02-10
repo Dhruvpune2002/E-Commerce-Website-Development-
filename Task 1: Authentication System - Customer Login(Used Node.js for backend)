@@ -1,0 +1,12 @@
+const User = require('./models/user'); // Customer model
+
+async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await User.findOne({ username, type: 'customer' });
+    // ... verify password, generate token if valid
+  } catch (error) {
+    // ... handle error
+  }
+};
+
