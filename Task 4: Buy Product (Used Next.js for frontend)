@@ -1,0 +1,26 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function BuyProduct({ product }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const handlePurchase = async () => {
+    try {
+      const response = await axios.post('/api/orders', { productId: product._id, quantity });
+      // Handle successful purchase (e.g., confirmation message, redirect)
+    } catch (error) {
+      // Handle error (e.g., display error message)
+    }
+  };
+
+  return (
+    <div>
+      {/* ... Display product details */}
+      <label htmlFor="quantity">Quantity:</label>
+      <input type="number" id="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+      <button type="button" onClick={handlePurchase}>Buy Now</button>
+    </div>
+  );
+}
+
+export default BuyProduct;
