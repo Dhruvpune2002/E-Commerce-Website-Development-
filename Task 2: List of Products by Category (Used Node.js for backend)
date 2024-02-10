@@ -1,0 +1,18 @@
+const Product = require('./models/product'); // Your Product model
+
+app.get('/products', async (req, res) => {
+  const { category } = req.query; // Optional category filter
+
+  try {
+    let products;
+    if (category) {
+      products = await Product.find({ category });
+    } else {
+      products = await Product.find();
+    }
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
