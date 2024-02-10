@@ -1,0 +1,28 @@
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  stock: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+// Example usage:
+Product.create({ name: 'T-shirt', description: 'Cool T-shirt!', price: 19.99, category: 'Clothing' })
+  .then(product => console.log('Product created:', product))
+  .catch(error => console.error('Error creating product:', error));
