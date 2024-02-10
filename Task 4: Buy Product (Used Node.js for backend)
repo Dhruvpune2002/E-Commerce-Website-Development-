@@ -1,0 +1,21 @@
+const Order = require('./models/order'); // Your Order model
+const Product = require('./models/product'); // Your Product model
+
+app.post('/orders', async (req, res) => {
+  const { productId, quantity } = req.body;
+
+  try {
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    const order = new Order({ product, quantity });
+    await order.save();
+    // Update product inventory if relevant
+    res.json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
