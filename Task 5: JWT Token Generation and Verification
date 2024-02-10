@@ -1,0 +1,23 @@
+const jwt = require('jsonwebtoken');
+
+const secretKey = 'your_secret_key'; // Replace with a strong secret key
+
+const generateToken = (userId) => {
+  const payload = { userId };
+  const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+  return token;
+};
+
+const verifyToken = (token) => {
+  try {
+    const decoded = jwt.verify(token, secretKey);
+    return decoded.userId;
+  } catch (error) {
+    return null;
+  }
+};
+
+// Example usage:
+const userId = 123;
+const token = generateToken(userId);
+const decodedUserId = verifyToken(token);
