@@ -1,0 +1,10 @@
+// ... Login form with username and password fields
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('/api/login/customer', { username, password });
+    // ... handle response, store token, redirect
+  } catch (error) {
+    // ... handle error
+  }
+};
